@@ -20,9 +20,9 @@ int handle_builtins(char *command, char **parameters)
 	{
 		if (parameters[1] != NULL)
 		{
-				ret = chdir(parameters[1]);
-				if (ret != 0)
-					perror("Error");
+			ret = chdir(parameters[1]);
+			if (ret != 0)
+				perror("Error");
 		}
 		else
 		{

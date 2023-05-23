@@ -9,21 +9,42 @@ void execute_command(char *command, char **parameters)
 {
 	char cmd[100];
 	char **env;
+	pid_t pid;
 
 	env = environ;
 	if (handle_builtins(command, parameters))
 		return;
-
-	if (fork() != 0)
-		wait(NULL);
+	if (strcmp(command, "/bin/ls") == 0)
+	{
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			exit(1);
+		}
+		else if (pid == 0)
+		{
+			execve(command, parameters, env);
+			perror("error");
+			exit(1);
+		}
+		else
+			wait(NULL);
+	}
 	else
 	{
-		_strcpy(cmd, "/bin/");
-		_strcat(cmd, command);
-		execve(cmd, parameters, env);
 
-		perror("error");
-		exit(1);
+		if (fork() != 0)
+			wait(NULL);
+		else
+		{
+			_strcpy(cmd, "/bin/");
+			_strcat(cmd, command);
+			execve(cmd, parameters, env);
+
+			perror("error");
+			exit(1);
+		}
 	}
 }
 
