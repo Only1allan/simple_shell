@@ -10,7 +10,7 @@ void read_command(char cmd[], char *par[])
 	char *pch, *line = NULL;
 	size_t len = 0;
 	ssize_t nread;
-	int i = 0;
+	int i = 0, j;
 
 	signal(SIGINT, SIG_IGN);
 	nread = getline(&line, &len, stdin);
@@ -37,5 +37,7 @@ void read_command(char cmd[], char *par[])
 		exit(EXIT_SUCCESS);
 	}
 	free(line);
+	for (j = 0; j < i; j++)
+      free(par[j]);
 
 }
