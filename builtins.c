@@ -7,7 +7,7 @@
 */
 int handle_builtins(char *command, char **parameters)
 {
-	char **env = environ;
+	int ret;
 
 	if (_strcmp(command, "exit") == 0)
 	{
@@ -16,24 +16,17 @@ int handle_builtins(char *command, char **parameters)
 		else
 			exit(_atoi(parameters[1]));
 	}
-	if (_strcmp(command, "env") == 0)
-	{
-		while (*env != NULL)
-		{
-			write(STDOUT_FILENO, "*env", _strlen(*env));
-			write(STDOUT_FILENO, "\n", 1);
-			env++;
-		}
-		return (1);
-	}
 	if (_strcmp(command, "cd") == 0)
 	{
 		if (parameters[1] != NULL)
-			chdir(parameters[1]);
+			ret = chdir(parameters[1]);
 		else
-			chdir(getenv("HOME"));
+			ret = chdir(getenv("HOME"));
+		if (ret != 0)
+			perror("error");
+
+		return (1);
 	}
 	return (0);
-
 }
 

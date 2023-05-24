@@ -15,6 +15,7 @@
 extern char **environ;
 
 void type_prompt(void);
+int handle_builtins(char *command, char **parameters);
 void read_command(char cmd[], char *par[]);
 void execute_command(char *command, char **parameters);
 size_t my_getline(char *line, size_t size, FILE *stream);
