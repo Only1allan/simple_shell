@@ -29,15 +29,17 @@ void read_command(char cmd[], char *par[])
 			_strcpy(cmd, par[0]);
 			par[i] = NULL;
 		}
-
+		free(line);
 	}
 	else
 	{
-		write(1, "Exiting success\n", 16);
+
+		free(line);
+		for (j = 0; j < i; j++)
+			free(par[j]);
 		exit(EXIT_SUCCESS);
 	}
-	free(line);
-	for (j = 0; j < i; j++)
-      free(par[j]);
 
+	for (j = 0; j < i; j++)
+		free(par[j]);
 }

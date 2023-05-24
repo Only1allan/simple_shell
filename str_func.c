@@ -83,10 +83,11 @@ char *_strdup(const char *str)
 {
 	char *dup;
 
-	dup = strdup(str);
+	dup = malloc(strlen(str) + 1);
 	if (dup == NULL)
 		return (NULL);
 
+	strcpy(dup, str);
 	return (dup);
 
 }
