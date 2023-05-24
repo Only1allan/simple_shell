@@ -5,7 +5,7 @@
  */
 void type_prompt(void)
 {
-	if (isatty(STDOUT_FILENO))
+	if (isatty(STDIN_FILENO))
 	{
 		const char *prompt;
 
