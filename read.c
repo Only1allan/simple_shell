@@ -39,5 +39,5 @@ void read_command(char cmd[], char *par[])
 		exit(EXIT_SUCCESS);
 	}
 	for (j = 0; j < i; j++)
-			free(par[j]);
+		free(par[j]);
 }

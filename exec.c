@@ -7,32 +7,32 @@
  */
 void execute_command(char *command, char **parameters)
 {
-	char cmd[100];
-	char **env;
 	pid_t pid;
+	char **env;
 
 	env = environ;
 	if (handle_builtins(command, parameters))
 		return;
-
-	pid = fork();
-	if (pid == -1)
+	if (_strcmp(command, "/bin/ls") == 0)
 	{
-		perror("fork");
-		exit(1);
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			exit(1);
+		}
+		else if (pid == 0)
+		{
+			execve(command, parameters, env);
+			perror("error");
+			exit(1);
+		}
+		else
+		{
+			wait(NULL);
+			return;
+		}
 	}
-	else if (pid == 0)
-	{
-		_strcpy(cmd, "/bin/");
-		_strcat(cmd, command);
-		execve(cmd, parameters, env);
-
-		perror("error");
-		exit(1);
-	}
-	else
-	{
-		wait(NULL);
-	}
+	execute_external_command(command, parameters);
 }
 
