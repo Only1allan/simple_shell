@@ -15,27 +15,6 @@ void execute_command(char *command, char **parameters)
 	if (handle_builtins(command, parameters))
 		return;
 
-	if (_strcmp(command, "/bin/ls") == 0)
-	{
-		pid = fork();
-		if (pid == -1)
-		{
-			perror("fork");
-			exit(1);
-		}
-		else if (pid == 0)
-		{
-			execve(command, parameters, env);
-			perror("error");
-			exit(1);
-		}
-		else
-		{
-			wait(NULL);
-			return;
-		}
-	}
-
 	pid = fork();
 	if (pid == -1)
 	{

@@ -8,7 +8,30 @@
 int handle_builtins(char *command, char **parameters)
 {
 	int ret;
+	pid_t pid;
+	char **env;
 
+	env = environ;
+	if (_strcmp(command, "/bin/ls") == 0)
+	{
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			exit(1);
+		}
+		else if (pid == 0)
+		{
+			execve(command, parameters, env);
+			perror("error");
+			exit(1);
+		}
+		else
+		{
+			wait(NULL);
+			return(0);
+		}
+	}
 	if (_strcmp(command, "exit") == 0)
 	{
 		if (parameters[1] == NULL)
