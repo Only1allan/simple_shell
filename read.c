@@ -33,7 +33,9 @@ void read_command(char cmd[], char *par[])
 	}
 	else
 	{
+		write(1, "Exiting success\n", 16);
 		exit(EXIT_SUCCESS);
 	}
 	free(line);
+
 }
