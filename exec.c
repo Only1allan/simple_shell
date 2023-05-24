@@ -16,21 +16,41 @@ void execute_command(char *command, char **parameters)
 	if (handle_builtins(command, parameters))
 		return;
 
-	pid = fork();
-	if (pid == -1)
+	if (_strcmp(command, "/bin/ls") == 0)
 	{
-		perror("fork");
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		_strcpy(cmd, "/bin/");
-		_strcat(cmd, command);
-		execve(cmd, parameters, env);
-
-		perror("error");
-		exit(1);
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			exit(1);
+		}
+		else if (pid == 0)
+		{
+			execve(command, parameters, env);
+			perror("error");
+			exit(EXIT_FAILURE);
+		}
+		else
+			wait(NULL);
 	}
 	else
-		wait(NULL);
+	{
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			exit(1);
+		}
+		else if (pid == 0)
+		{
+			_strcpy(cmd, "/bin/");
+			_strcat(cmd, command);
+			execve(cmd, parameters, env);
+
+			perror("error");
+			exit(1);
+		}
+		else
+			wait(NULL);
+	}
 }
