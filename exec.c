@@ -31,6 +31,6 @@ void execute_command(char *command, char **parameters)
 		perror("error");
 		exit(1);
 	}
-		else
-			wait(NULL);
+	else
+		wait(NULL);
 }
