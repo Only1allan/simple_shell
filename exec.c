@@ -16,7 +16,7 @@ void execute_command(char *command, char **parameters)
 	if (handle_builtins(command, parameters))
 		return;
 
-	if (strcmp(command, "/bin/ls") == 0)
+	if (_strcmp(command, "/bin/ls") == 0)
 	{
 		pid = fork();
 		if (pid == -1)
@@ -59,5 +59,4 @@ void execute_command(char *command, char **parameters)
 			free(parameters[i]);
 	}
 }
-
 
