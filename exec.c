@@ -12,40 +12,25 @@ void execute_command(char *command, char **parameters)
 	pid_t pid;
 
 	env = environ;
+
 	if (handle_builtins(command, parameters))
 		return;
-	if (strcmp(command, "/bin/ls") == 0)
+
+	pid = fork();
+	if (pid == -1)
 	{
-		pid = fork();
-		if (pid == -1)
-		{
-			perror("fork");
-			exit(1);
-		}
-		else if (pid == 0)
-		{
-			execve(command, parameters, env);
-			perror("error");
-			exit(1);
-		}
+		perror("fork");
+		exit(1);
+	}
+	else if (pid == 0)
+	{
+		_strcpy(cmd, "/bin/");
+		_strcat(cmd, command);
+		execve(cmd, parameters, env);
+
+		perror("error");
+		exit(1);
+	}
 		else
 			wait(NULL);
-	}
-	else
-	{
-
-		if (fork() != 0)
-			wait(NULL);
-		else
-		{
-			_strcpy(cmd, "/bin/");
-			_strcat(cmd, command);
-			execve(cmd, parameters, env);
-
-			perror("error");
-			exit(1);
-		}
-	}
 }
-
-

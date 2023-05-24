@@ -19,15 +19,12 @@ int handle_builtins(char *command, char **parameters)
 	if (_strcmp(command, "cd") == 0)
 	{
 		if (parameters[1] != NULL)
-		{
 			ret = chdir(parameters[1]);
-			if (ret != 0)
-				perror("Error");
-		}
 		else
-		{
-			chdir(getenv("HOME"));
-		}
+			ret = chdir(getenv("HOME"));
+		if (ret != 0)
+			perror("error");
+
 		return (1);
 	}
 	return (0);
