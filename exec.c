@@ -10,6 +10,7 @@ void execute_command(char *command, char **parameters)
 	char cmd[100];
 	char **env;
 	pid_t pid;
+	int i;
 
 	env = environ;
 	if (handle_builtins(command, parameters))
@@ -35,6 +36,7 @@ void execute_command(char *command, char **parameters)
 			return;
 		}
 	}
+
 	pid = fork();
 	if (pid == -1)
 	{
@@ -51,7 +53,11 @@ void execute_command(char *command, char **parameters)
 		exit(1);
 	}
 	else
+	{
 		wait(NULL);
+		for (i = 0; parameters[i] != NULL; i++)
+			free(parameters[i]);
+	}
 }
 
 
