@@ -33,10 +33,10 @@ void read_command(char cmd[], char *par[])
 	}
 	else
 	{
-
 		free(line);
 		for (j = 0; j < i; j++)
-			free(par[j]);
+      		free(par[j]);
 		exit(EXIT_SUCCESS);
 	}
+	
 }
