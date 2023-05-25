@@ -31,8 +31,6 @@ void execute_command(char *command, char **parameters)
 		else
 		{
 			wait(NULL);
-			for (i = 0; parameters[i] != NULL; i++)
-				free(parameters[i]);
 			return;
 		}
 	}
