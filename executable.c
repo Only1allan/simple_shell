@@ -10,6 +10,7 @@ void execute_external_command(char *command, char **parameters)
 	char cmd[100];
 	char **env;
 	pid_t pid;
+    int i;
 
 	env = environ;
 
@@ -31,5 +32,7 @@ void execute_external_command(char *command, char **parameters)
 	else
 	{
 		wait(NULL);
+        for (i = 0; parameters[i] != NULL; i++)
+			free(parameters[i]);
 	}
 }
