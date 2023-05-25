@@ -9,7 +9,6 @@ void execute_command(char *command, char **parameters)
 {
 	pid_t pid;
 	char **env;
-	int i;
 
 	env = environ;
 	if (handle_builtins(command, parameters))
