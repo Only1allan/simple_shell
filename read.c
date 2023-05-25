@@ -38,5 +38,4 @@ void read_command(char cmd[], char *par[])
 			free(par[j]);
 		exit(EXIT_SUCCESS);
 	}
-	
 }
