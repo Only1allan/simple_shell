@@ -98,8 +98,8 @@ The `shell.h` file also declares the following functions:
 ### **Clone the Repository**
 1. Clone the repository using Git:  
    ```bash
-   git clone <your-repo-link>
-   cd <repository-name>`` 
+   git clone https://github.com/Only1allan/simple_shell.git
+   cd simple_shell`` 
 
 ### **Compile the Code**
 
@@ -150,20 +150,6 @@ The `shell.h` file also declares the following functions:
         
         `exit` 
         
-
-----------
-
-## **Directory Structure**
-
-The project is organized as follows:
-shell.h            # Header file with function declarations and imports
-main.c                   # Entry point for the shell
-read.c           # Reads and tokenizes user input
-exec.c        # Handles execution of commands
-execute_external_command.c # Executes external commands
-├── handle_builtins.c        # Handles built-in commands like cd and exit
-├── _helpers.c               # Helper functions for string and utility operations
-├── README.md                # Project documentation` 
 
 ----------
 
